@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Study Technique Finder</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- NAVIGATION BAR -->
+
+    <nav id="navbar" class="navbar" style="display: none;">
+
+        <div class="logo">
+            <img src="book.png" alt="StudyTech Logo" width="30" height="30">
+            <span>StudyTech</span>
+        </div>
+    
+        <div class="nav-links">
+            <button onclick="showPage('homePage')">Home</button>
+            <button onclick="showPage('techniquesPage')">Techniques</button>
+            <button onclick="startQuestionnaire()">Find My Technique</button>
+            <button onclick="logout()">Logout</button>
+        </div>
+    
+    </nav>
+
+
+    <!-- LOGIN PAGE -->
+
+    <section id="loginPage" class="page active">
+
+        <div class="login-container">
+
+            <div class="login-box">
+
+                <div class="login-icon">
+                    <img src="book.png" alt="StudyTech Logo" width="60" height="60">
+                </div>
+
+                <h1>Study Technique Finder</h1>
+
+                <p class="login-subtitle">
+                    Find the study technique that suits you
+                </p>
+
+                <label for="username">
+                    Username
+                </label>
+
+                <input
+                    type="text"
+                    id="username"
+                    placeholder="Enter username"
+                >
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter password"
+                >
+
+                <button
+                    type="button"
+                    class="login-btn"
+                    onclick="login()"
+                >
+                    Login
+                </button>
+
+                <p
+                    id="loginError"
+                    class="error-message"
+                    style="display: none;"
+                >
+                    Invalid username or password.
+                </p>
+
+                <div class="demo-login">
+                    <strong>Demo Login</strong>
+                    <br>
+                    Username: student
+                    <br>
+                    Password: 1234
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- HOME PAGE -->
+
+    <section id="homePage" class="page">
+
+        <div class="hero">
+
+            <h1>
+                Welcome to StudyTech <img src="book.png" alt="StudyTech Logo" width="60" height="60">
+            </h1>
+
+            <p>
+                Discover the study technique that matches your learning habits.
+            </p>
+
+            <button
+                class="primary-btn"
+                onclick="startQuestionnaire()"
+            >
+                Find My Study Technique
+            </button>
+
+        </div>
+
+
+        <div class="content">
+
+            <h2>Why Use Study Techniques?</h2>
+
+            <p>
+                Different students learn in different ways.
+                This website helps you explore three useful study techniques:
+                Pomodoro, Active Recall and Blurting.
+            </p>
+
+
+            <div class="cards">
+
+                <div class="card">
+
+                    <div class="card-icon">
+                        <img src="pomodoro.png" alt="StudyTech Logo" width="50" height="50">
+                    </div>
+
+                    <h3>Pomodoro Technique</h3>
+
+                    <p>
+                        Study for a focused period of time and then take
+                        a short break.
+                    </p>
+
+                    <button
+                        onclick="showPage('timerPage')"
+                    >
+                        Try Pomodoro
+                    </button>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="card-icon">
+                        <img src="recall.png" alt="StudyTech Logo" width="50" height="50">
+                    </div>
+
+                    <h3>Active Recall</h3>
+
+                    <p>
+                        Test yourself by trying to remember information
+                        without looking at your notes.
+                    </p>
+
+                    <button
+                        onclick="showPage('quizPage')"
+                    >
+                        Try Active Recall
+                    </button>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="card-icon">
+                        <img src="blurting.png" alt="StudyTech Logo" width="50" height="50">
+                    </div>
+
+                    <h3>Blurting Technique</h3>
+
+                    <p>
+                        Write down everything you remember about a topic
+                        before checking your notes.
+                    </p>
+
+                    <button
+                        onclick="showPage('blurtingPage')"
+                    >
+                        Try Blurting
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- QUESTIONNAIRE PAGE -->
+
+    <section id="questionPage" class="page">
+
+        <div class="question-wrapper">
+
+            <h1>Find Your Study Technique</h1>
+
+            <p>
+                Answer the questions based on your study habits.
+            </p>
+
+
+            <div class="progress-container">
+
+                <div
+                    id="progressBar"
+                    class="progress-bar"
+                ></div>
+
+            </div>
+
+
+            <div
+                id="questionContainer"
+                class="question-container"
+            >
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- RESULT PAGE -->
+
+    <section id="resultPage" class="page">
+
+        <div class="result-container">
+
+            <div
+                id="resultIcon"
+                class="result-icon"
+            >
+                <img
+                id="resultIconImage"
+                src=""
+                alt="Recommended Technique"
+                width="80"
+                height="80"
+                >
+            </div>
+
+            <h1>Your Recommended Technique</h1>
+
+            <h2 id="resultTitle">
+                Study Technique
+            </h2>
+
+            <p id="resultDescription">
+                Your result will appear here.
+            </p>
+
+
+            <div class="score-box">
+
+                <h3>Your Scores</h3>
+
+                <p>
+                    <img src="pomodoro.png" alt="StudyTech Logo" width="50" height="50"> Pomodoro:
+                    <strong id="pomodoroScore">0</strong>
+                </p>
+
+                <p>
+                    <img src="recall.png" alt="StudyTech Logo" width="50" height="50"> Active Recall:
+                    <strong id="recallScore">0</strong>
+                </p>
+
+                <p>
+                    <img src="blurting.png" alt="StudyTech Logo" width="50" height="50"> Blurting:
+                    <strong id="blurtingScore">0</strong>
+                </p>
+
+            </div>
+
+
+            <button
+                class="primary-btn"
+                onclick="showRecommendedActivity()"
+            >
+                Try Recommended Technique
+            </button>
+
+            <button
+                class="secondary-btn"
+                onclick="startQuestionnaire()"
+            >
+                Retake Questionnaire
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- TECHNIQUES PAGE -->
+
+    <section id="techniquesPage" class="page">
+
+        <div class="content">
+
+            <h1>Study Techniques</h1>
+
+            <div class="technique-list">
+
+
+                <!-- Pomodoro -->
+
+                <div class="technique-box">
+
+                    <div class="technique-icon">
+                        <img src="pomodoro.png" alt="StudyTech Logo" width="50" height="50">
+                    </div>
+
+                    <div>
+
+                        <h2>Pomodoro Technique</h2>
+
+                        <p>
+                            The Pomodoro Technique divides study time
+                            into focused sessions followed by short breaks.
+                        </p>
+
+                        <h3>How to use it:</h3>
+
+                        <ol>
+                            <li>Choose a task.</li>
+                            <li>Study for 25 minutes.</li>
+                            <li>Take a 5-minute break.</li>
+                            <li>Repeat the process.</li>
+                        </ol>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Active Recall -->
+
+                <div class="technique-box">
+
+                    <div class="technique-icon">
+                        <img src="recall.png" alt="StudyTech Logo" width="50" height="50">
+                    </div>
+
+                    <div>
+
+                        <h2>Active Recall</h2>
+
+                        <p>
+                            Active Recall is a technique where you actively
+                            retrieve information from your memory.
+                        </p>
+
+                        <h3>How to use it:</h3>
+
+                        <ol>
+                            <li>Read and understand the topic.</li>
+                            <li>Close your notes.</li>
+                            <li>Ask yourself questions.</li>
+                            <li>Answer from memory.</li>
+                        </ol>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Blurting -->
+
+                <div class="technique-box">
+
+                    <div class="technique-icon">
+                        <img src="blurting.png" alt="StudyTech Logo" width="50" height="50">
+                    </div>
+
+                    <div>
+
+                        <h2>Blurting Technique</h2>
+
+                        <p>
+                            Blurting involves writing everything you remember
+                            about a topic without looking at your notes.
+                        </p>
+
+                        <h3>How to use it:</h3>
+
+                        <ol>
+                            <li>Study a topic.</li>
+                            <li>Close your notes.</li>
+                            <li>Write everything you remember.</li>
+                            <li>Compare your answer with your notes.</li>
+                        </ol>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- POMODORO PAGE -->
+
+    <section id="timerPage" class="page">
+
+        <div class="activity-container">
+
+            <h1><img src="pomodoro.png" alt="StudyTech Logo" width="50" height="50"> Pomodoro Timer</h1>
+
+            <p>
+                Focus on your study for 25 minutes.
+            </p>
+
+            <div
+                id="timer"
+                class="timer"
+            >
+                25:00
+            </div>
+
+
+            <div class="timer-buttons">
+
+                <button
+                    onclick="startTimer()"
+                    class="primary-btn"
+                >
+                    Start
+                </button>
+
+                <button
+                    onclick="pauseTimer()"
+                    class="secondary-btn"
+                >
+                    Pause
+                </button>
+
+                <button
+                    onclick="resetTimer()"
+                    class="secondary-btn"
+                >
+                    Reset
+                </button>
+
+            </div>
+
+
+            <button
+                class="back-btn"
+                onclick="showPage('homePage')"
+            >
+                ← Back to Home
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- ACTIVE RECALL PAGE -->
+
+    <section id="quizPage" class="page">
+
+        <div class="activity-container">
+
+            <h1><img src="recall.png" alt="StudyTech Logo" width="50" height="50"> Active Recall Quiz</h1>
+
+            <p>
+                Try to answer the question without checking your notes.
+            </p>
+
+
+            <div class="quiz-box">
+
+                <h2>
+                    What is photosynthesis?
+                </h2>
+
+                <button
+                    onclick="checkQuiz('A')"
+                    class="quiz-option"
+                >
+                    A. The process plants use to make food using light energy
+                </button>
+
+                <button
+                    onclick="checkQuiz('B')"
+                    class="quiz-option"
+                >
+                    B. The process plants use to absorb water
+                </button>
+
+                <button
+                    onclick="checkQuiz('C')"
+                    class="quiz-option"
+                >
+                    C. The process plants use to produce soil
+                </button>
+
+                <button
+                    onclick="checkQuiz('D')"
+                    class="quiz-option"
+                >
+                    D. The process plants use to grow roots
+                </button>
+
+
+                <p
+                    id="quizResult"
+                    class="quiz-result"
+                ></p>
+
+            </div>
+
+
+            <button
+                class="back-btn"
+                onclick="showPage('homePage')"
+            >
+                ← Back to Home
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- BLURTING PAGE -->
+
+    <section id="blurtingPage" class="page">
+
+        <div class="activity-container">
+
+            <h1><img src="blurting.png" alt="StudyTech Logo" width="50" height="50"> Blurting Activity</h1>
+
+            <p>
+                Topic: <strong>Photosynthesis</strong>
+            </p>
+
+            <p>
+                Close your notes and write everything you remember.
+            </p>
+
+
+            <textarea
+                id="blurtText"
+                placeholder="Write everything you remember about photosynthesis..."
+            ></textarea>
+
+
+            <button
+                onclick="showBlurtingPoints()"
+                class="primary-btn"
+            >
+                Check Key Points
+            </button>
+
+
+            <div
+                id="blurtingPoints"
+                class="key-points"
+                style="display: none;"
+            >
+
+                <h2>Key Points</h2>
+
+                <ul>
+
+                    <li>
+                        Photosynthesis occurs mainly in plant leaves.
+                    </li>
+
+                    <li>
+                        Plants use light energy.
+                    </li>
+
+                    <li>
+                        Carbon dioxide and water are used.
+                    </li>
+
+                    <li>
+                        Glucose is produced.
+                    </li>
+
+                    <li>
+                        Oxygen is released.
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <button
+                class="back-btn"
+                onclick="showPage('homePage')"
+            >
+                ← Back to Home
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
